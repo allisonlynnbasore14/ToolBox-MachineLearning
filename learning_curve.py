@@ -20,18 +20,24 @@ def display_digits():
 
 def train_model():
     data = load_digits()
+    #X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, train_size=0.4)
     num_trials = 10
     train_percentages = range(5, 95, 5)
     test_accuracies = numpy.zeros(len(train_percentages))
+    
 
-    # train models with training percentages between 5 and 90 (see
-    # train_percentages) and evaluate the resultant accuracy for each.
-    # You should repeat each training percentage num_trials times to smooth out
-    # variability.
-    # For consistency with the previous example use
-    # model = LogisticRegression(C=10**-10) for your learner
+    
+    for per in train_percentages: #running though all percents
+        totalval = 0
+        for i in range(num_trials): #running through each one 10 times
+            X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, train_size=per) #running the tests
+            model = LogisticRegression(C=10) #making the model
+            model.fit(X_train, y_train) #fitting the model
+            totalval = totalval + model.score(X_test,y_test) #collecting the output for each run and adding together to find average
+        aver = totalval/num_trials #finding the average for each percent
+        run = int(per/5 -1) #calculating the run totals, the /5 thing is get getting the percents to correspomd to the graph, so perecnt of 20/5 means it is on the 4th run through and the 4th index of value outputs
+        test_accuracies[run] = aver #storinig the values to be plotted
 
-    # TODO: your code here
 
     fig = plt.figure()
     plt.plot(train_percentages, test_accuracies)
@@ -42,5 +48,5 @@ def train_model():
 
 if __name__ == "__main__":
     # Feel free to comment/uncomment as needed
-    display_digits()
-    # train_model()
+    #display_digits()
+    train_model()

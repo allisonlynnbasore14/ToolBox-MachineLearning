@@ -1,0 +1,21 @@
+Questions for Machine Learning ToolBox
+
+
+Allison Basore
+2/18/2017
+ToolBox Machine Learning
+
+General trend in the curve?
+1) As expected, it increases gradually as the percentage of data used for training increases. It only reaches 23% accuracy though. It reaches this max with 95 percent of stat used for training. 
+
+
+Are there parts of the curve that are noisier?
+2) The beginning of the curve is noisier than the end. I think this is could be because you have less data to use for actual testing toward the end, and therefore less variance between trials. If you have a lot of test data, you have a higher chance of having significant outliers.
+
+
+3) At first I used 10, then 20, then 50, but only at 1000 trials was I satisfied that it was smooth enough. To see if I needed more trials, I just ran the program several times, checking for variance with the last time I ran the program. 
+
+
+4) When C increases, the scale goes way up. So when C is 10, the scale of accuracy does down to 0.0 and 0.9. When C is lowered to 10^-20, it goes back to normal scale, but changes the curve! A very low C value, produces a minimal (less than 10%) accuracy for all percentages up to 70% of data used. On the graph, this makes a flat line, until the percentage used for training reaches 70, then it spikes to be about 30% accuracy. 
+
+According to the documentation, higher values, of C give the model more freedom and lower values, make it more constrained. I think this means that it give more leeway for being close to accurate.
